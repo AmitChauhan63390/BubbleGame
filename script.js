@@ -30,7 +30,10 @@ function runTimer(){
         }
         else{
             clearInterval(timeint);
-            document.querySelector("#pbtm").innerHTML=`<h1>Game Over</h1>`;
+            document.querySelector("#pbtm").innerHTML = `
+            <h1 id="gameOverText">Game Over</h1>
+            <button id="playAgainButton">Play Again</button>
+        `;
         }
         
         
@@ -38,19 +41,38 @@ function runTimer(){
 
 }
 
-document.querySelector("#pbtm").addEventListener("click",function(dets){
+document.querySelector("#pbtm").addEventListener("click", function (dets) {
     var hitclick = Number(dets.target.textContent);
-    if(hitclick===hitrn){
+    if (hitclick === hitrn) {
         increasescore();
         makeBubble();
         getnewhit();
-    }
-    
-    else if(hitclick!==hitrn){
+    } else if (hitclick !== hitrn) {
         clearInterval(timeint);
-        document.querySelector("#pbtm").innerHTML=`<h1>Game Over</h1>`;
+        document.querySelector("#pbtm").innerHTML = `
+            <h1 id="gameOverText">Game Over</h1>
+            <button id="playAgainButton">Play Again</button>
+        `;
+        document.querySelector("#playAgainButton").addEventListener("click", function () {
+            location.reload();
+        });
     }
-})
+});
+
+function restartGame() {
+    Timer = 60;
+    score = 0;
+    hitrn = 0;
+    document.querySelector("#timerval").textContent = Timer;
+    document.querySelector("#scoreval").textContent = score;
+    document.querySelector("#hitval").textContent = hitrn;
+    document.querySelector("#pbtm").innerHTML = ""; // Clear the game over screen.
+    runTimer();
+    makeBubble();
+    getnewhit();
+    increasescore();
+}
+
 
 runTimer();
 makeBubble();
