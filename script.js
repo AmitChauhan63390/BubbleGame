@@ -1,7 +1,7 @@
 var Timer=60;
 var score=0;
 var hitrn=0;
-
+var timeint;
 
 function increasescore(){
     score+=10;
@@ -22,7 +22,7 @@ function getnewhit(){
     document.querySelector("#hitval").textContent=hitrn;
 }
 function runTimer(){
-    var timeint = setInterval(function(){
+    timeint = setInterval(function(){
         if(Timer>0){
             Timer--;
             document.querySelector("#timerval").textContent=Timer;
@@ -44,6 +44,11 @@ document.querySelector("#pbtm").addEventListener("click",function(dets){
         increasescore();
         makeBubble();
         getnewhit();
+    }
+    
+    else if(hitclick!==hitrn){
+        clearInterval(timeint);
+        document.querySelector("#pbtm").innerHTML=`<h1>Game Over</h1>`;
     }
 })
 
