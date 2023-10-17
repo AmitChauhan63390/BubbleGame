@@ -1,4 +1,4 @@
-var Timer=3;
+var Timer=60;
 var score=0;
 var hitrn=0;
 
@@ -19,7 +19,7 @@ function makeBubble() {
 }
 function getnewhit(){
     hitrn=Math.floor(Math.random()*10);
-    document.querySelector("#hitval").textContent=rn;
+    document.querySelector("#hitval").textContent=hitrn;
 }
 function runTimer(){
     var timeint = setInterval(function(){
